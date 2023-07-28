@@ -59,4 +59,14 @@ public class EventController {
     public ResponseEntity<Event> Delete(@PathVariable Long id){
         return new ResponseEntity(eventService.delete(id), HttpStatus.OK);
     }
+
+    @GetMapping("/seminar")
+    public ResponseEntity<List<Event>> getSeminars(){
+        return new ResponseEntity(eventService.getSeminars(),HttpStatus.OK);
+    }
+
+    @GetMapping("/competition")
+    public ResponseEntity<List<Event>> getCompetitions(){
+        return new ResponseEntity(eventService.getCompetitions(),HttpStatus.OK);
+    }
 }

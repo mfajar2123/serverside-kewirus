@@ -9,6 +9,7 @@ import com.serverside.repository.EventRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.beans.BeanUtils;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -54,6 +55,20 @@ public class EventService {
         Event event = getById(id);
         eventRepository.delete(event);
         return event;
+    }
+
+    public List<Event> getSeminars() {
+        List<Event> allEvents = eventRepository.findAll();
+        return allEvents.stream()
+                .filter(event -> event.getCategory().equalsIgnoreCase("Seminar"))
+                .collect(Collectors.toList());
+    }
+
+    public List<Event> getCompetitions() {
+        List<Event> allEvents = eventRepository.findAll();
+        return allEvents.stream()
+                .filter(event -> event.getCategory().equalsIgnoreCase("Lomba"))
+                .collect(Collectors.toList());
     }
 
 }
